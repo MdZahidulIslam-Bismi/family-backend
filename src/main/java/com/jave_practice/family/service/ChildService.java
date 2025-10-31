@@ -1,9 +1,11 @@
 package com.jave_practice.family.service;
 
 import com.jave_practice.family.entity.Child;
+import com.jave_practice.family.entity.Family;
 import com.jave_practice.family.repository.ChildRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,7 +28,20 @@ public class ChildService {
                 .orElseThrow(() -> new RuntimeException("Child not found with id: " + id));
     }
 
+//    public void deleteChild(Long id) {
+//        childRepository.deleteById(id);
+//    }
+
+    @Transactional
     public void deleteChild(Long id) {
-        childRepository.deleteById(id);
+        Child child = childRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Child not found with id: " + id));
+
+        Family family = child.getFamily();
+        if (family != null && family.getChildren() != null) {
+            family.getChildren().remove(child); // prevents Hibernate from re-saving the child
+        }
+
+        childRepository.delete(child);
     }
 }

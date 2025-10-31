@@ -18,9 +18,14 @@ public class Family {
     private String state;
     private String zip;
 
-    @OneToMany(mappedBy = "family", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference("family-child-ref")
+//    @OneToMany(mappedBy = "family", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JsonManagedReference("family-child-ref")
+//    private List<Child> children;
+
+
+    @OneToMany(mappedBy = "family", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Child> children;
+
 
     // Getters & setters
     public Long getId() { return id; }

@@ -2,6 +2,7 @@ package com.jave_practice.family.controller;
 
 import com.jave_practice.family.entity.Child;
 import com.jave_practice.family.entity.Family;
+import org.springframework.http.HttpStatus;
 import com.jave_practice.family.service.ChildService;
 import com.jave_practice.family.service.FamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +61,22 @@ public class ChildController {
     }
 
     // Delete a child by ID
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Void> deleteChild(@PathVariable Long id) {
+//        childService.deleteChild(id);
+//        return ResponseEntity.noContent().build();
+//    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteChild(@PathVariable Long id) {
-        childService.deleteChild(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<String> deleteChild(@PathVariable Long id) {
+        try {
+            childService.deleteChild(id);
+            return ResponseEntity.ok("Child deleted successfully!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Child not found with ID: " + id);
+        }
     }
+
+
 }
