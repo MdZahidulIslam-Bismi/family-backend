@@ -1,3 +1,4 @@
+
 package com.jave_practice.family.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -27,6 +28,7 @@ public class Child {
         if (family != null) return family.getName();
         return null;
     }
+
 
 
     // Standard getters/setters

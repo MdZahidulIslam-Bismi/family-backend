@@ -61,12 +61,6 @@ public class ChildController {
     }
 
     // Delete a child by ID
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteChild(@PathVariable Long id) {
-//        childService.deleteChild(id);
-//        return ResponseEntity.noContent().build();
-//    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteChild(@PathVariable Long id) {
         try {
@@ -77,6 +71,5 @@ public class ChildController {
                     .body("Child not found with ID: " + id);
         }
     }
-
 
 }

@@ -16,7 +16,7 @@ public class FamilyService {
     }
 
     public List<Family> getAllfamily(){
-         return familyRepository.findAll();
+        return familyRepository.findAll();
     }
 
     public Family getFamilyById(Long id) {
@@ -24,7 +24,7 @@ public class FamilyService {
                 .orElseThrow(() -> new RuntimeException("Family not found with id: " + id));
     }
 
-    // ✅ NEW: Update existing family
+    // NEW: Update existing family
     public Family updateFamily(Long id, Family updatedFamily) {
         Family existingFamily = familyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Family not found with id: " + id));

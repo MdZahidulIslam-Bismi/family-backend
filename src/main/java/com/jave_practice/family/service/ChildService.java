@@ -1,6 +1,7 @@
 package com.jave_practice.family.service;
 
 import com.jave_practice.family.entity.Child;
+
 import com.jave_practice.family.entity.Family;
 import com.jave_practice.family.repository.ChildRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +29,6 @@ public class ChildService {
                 .orElseThrow(() -> new RuntimeException("Child not found with id: " + id));
     }
 
-//    public void deleteChild(Long id) {
-//        childRepository.deleteById(id);
-//    }
-
     @Transactional
     public void deleteChild(Long id) {
         Child child = childRepository.findById(id)
@@ -39,9 +36,10 @@ public class ChildService {
 
         Family family = child.getFamily();
         if (family != null && family.getChildren() != null) {
-            family.getChildren().remove(child); // prevents Hibernate from re-saving the child
+            family.getChildren().remove(child); // prevent Hibernate from re-saving child
         }
 
         childRepository.delete(child);
     }
+
 }

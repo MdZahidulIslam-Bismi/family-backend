@@ -34,7 +34,7 @@ public class FamilyController {
     }
 
 
-    //NEW: Get a family by ID (needed for edit page)
+    //Get a family by ID (needed for edit page)
     @GetMapping("/family/{id}")
     public Family getFamilyById(@PathVariable Long id) {
         return familyService.getFamilyById(id);
